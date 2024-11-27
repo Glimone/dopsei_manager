@@ -1,0 +1,13 @@
+# Ignorar a pasta do ambiente virtual
+dopsei_manager_venv/
+
+# Arquivos temporários do Python
+*.pyc
+__pycache__/
+
+# Arquivos de configuração do VSCode
+.vscode/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
