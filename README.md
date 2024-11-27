@@ -1,2 +1,2 @@
 # dopsei_manager
-Auto management of datas from SEI (In development)
+Auto management of datas from SEI
