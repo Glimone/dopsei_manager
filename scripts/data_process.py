@@ -26,3 +26,6 @@ def validate_numero_processo(value):
 
 value = input("Number process: ")
 print(validate_numero_processo(value))
+
+def validate_lote(value):
+    pattern = r'^L'
