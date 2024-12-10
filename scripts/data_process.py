@@ -20,7 +20,10 @@ df = build_dataframe()
 def validate_numero_processo(value):
     pattern = r'^\d{3}.\d{8}/\d{4}-\d{2}'
     
-    return f"{bool(re.fullmatch(pattern, value)), {value}}"
+    if re.fullmatch(pattern, value):
+        return value
+    else:
+        return 'Invalid_Number'
 
 
 
@@ -69,3 +72,25 @@ def validate_atribuicao(lote):
 
 
 print(validate_atribuicao(lote))
+
+
+def validate_interessado(value):
+    if isinstance(value, str) and len(value) > 0:
+        return value
+    else:
+        return 'Invalid_interesting'
+    
+
+interessado = input("Interessado: ")
+print(validate_interessado(interessado))
+
+def validate_data(value):
+    pattern = r'^\d{2}/\d{2}/\d{4}$'
+    if re.fullmatch(pattern, value):
+        return value
+    else:
+        return 'Invalid_Data'
+    
+data = input("Data: ")
+print(validate_data(data))
+
