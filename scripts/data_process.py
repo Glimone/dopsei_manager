@@ -94,3 +94,4 @@ def validate_data(value):
 data = input("Data: ")
 print(validate_data(data))
 
+e
