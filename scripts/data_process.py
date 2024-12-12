@@ -94,3 +94,11 @@ def validate_data(value):
 data = input("Data: ")
 print(validate_data(data))
 
+def validate_assunto(value):
+    if isinstance(value, str) and len(value) > 0:
+        return value
+    else:
+        return 'Invalid_assunto'
+    
+assunto = input("Assunto: ")
+print(validate_assunto(assunto))
