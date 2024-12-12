@@ -17,6 +17,7 @@ def build_dataframe():
 df = build_dataframe()
 
 
+#Validação do número do processo:
 def validate_numero_processo(value):
     pattern = r'^\d{3}.\d{8}/\d{4}-\d{2}'
     
@@ -26,10 +27,7 @@ def validate_numero_processo(value):
         return 'Invalid_Number'
 
 
-
-value = input("Number process: ")
-print(validate_numero_processo(value))
-
+#Validação do lote: 
 def validate_lote(value):
     pattern = r'^(L|LT|LOTE|LOT)\s?(\d{2})$'
 
@@ -41,14 +39,6 @@ def validate_lote(value):
         return None
     
 
-v1 = input("Lote: ")
-lote = validate_lote(v1)
-
-if lote:
-    lote = int(lote)
-else:
-    print("Lote inválido")
-    Lote = None
 
 
 def validate_atribuicao(lote):
@@ -66,12 +56,11 @@ def validate_atribuicao(lote):
     
     for tecnico, lotes in atribuition_map.items(): 
         if lote_num in lotes:
-            return f"Técnico responsável: {tecnico}"
+            return tecnico
         
-    return "Técnico indefinido"
+    return None
 
 
-print(validate_atribuicao(lote))
 
 
 def validate_interessado(value):
@@ -81,8 +70,6 @@ def validate_interessado(value):
         return 'Invalid_interesting'
     
 
-interessado = input("Interessado: ")
-print(validate_interessado(interessado))
 
 def validate_data(value):
     pattern = r'^\d{2}/\d{2}/\d{4}$'
@@ -91,8 +78,6 @@ def validate_data(value):
     else:
         return 'Invalid_Data'
     
-data = input("Data: ")
-print(validate_data(data))
 
 def validate_assunto(value):
     if isinstance(value, str) and len(value) > 0:
@@ -100,6 +85,81 @@ def validate_assunto(value):
     else:
         return 'Invalid_assunto'
     
-assunto = input("Assunto: ")
-print(validate_assunto(assunto))
+def validate_status(atribuido):
+    if atribuido:
+        return "Atribuido"
+    else: 
+        return "Atribuir"
+   
+api_data = [
+    {
+        "numero_processo": "123.12345678/2024-01",
+        "lote": "lote 13",
+        "interessado": "Rodovias das colinas",
+        "data_entrada": "22/02/2024",
+        "assunto": "PROGRAMAÇÃO DOS SERVIÇOS DE CONSERVAÇÃO DE ROTINA",
+    },
 
+    {
+        "numero_processo": "234.12345678/2024-10",
+        "lote": "l16",
+        "interessado": "ViaOeste",
+        "data_entrada": "10/06/2024",
+        "assunto": "INSTALAÇÃO DE SINALIZADORES LUMINOSOS EM VEÍCULOS PRESTADORES DE SERVIÇOS, UTILIZADOS NAS ATIVIDADES DA ARTESP.",
+    },
+
+    {
+        "numero_processo": "567.12345678/2024-36",
+        "lote": "l14",
+        "interessado": "Leonardo Hotta",
+        "data_entrada": "11/02/2023",
+        "assunto": "PROT.SIGA 621104,",
+    },
+
+]
+
+
+
+
+# numero_processo = validate_numero_processo(input("Número: "))
+# lote = validate_lote(input("Lote: "))
+# data = validate_data(input("Data: "))
+
+# if lote:
+#     lote = int(lote)
+# else:
+#     print("Lote inválido")
+#     Lote = None
+
+# atribuido = validate_atribuicao(lote)
+# interessado = validate_interessado(input("Interessado: "))
+# assunto = validate_assunto(input("Assunto: "))
+# status = validate_status(atribuido)
+for processo in api_data:
+    numero_processo = validate_numero_processo(processo["numero_processo"])
+    lote = validate_lote(processo["lote"])
+    if lote:
+        lote = int(lote)
+    else: 
+        lote = "N/A"
+    
+    atribuido = validate_atribuicao(lote)
+    interessado = validate_interessado(processo["interessado"])
+    data = validate_data(processo["data_entrada"])
+    status = validate_status(atribuido)
+    assunto = validate_assunto(processo["assunto"])
+
+
+    new_row = pd.DataFrame( [ {
+        "Número do Processo": numero_processo,
+        "Lote": lote,
+        "Atribuição": atribuido,
+        "Interessado": interessado,
+        "Entrada(Data)": data,
+        "Status": status,
+        "Assunto": assunto,
+    } ] )    
+    df = pd.concat([new_row, df], ignore_index=True)
+
+
+df.to_excel("SEI.xlsx", index=False)
