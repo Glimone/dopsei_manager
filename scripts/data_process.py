@@ -94,6 +94,7 @@ def validate_data(value):
 data = input("Data: ")
 print(validate_data(data))
 
+<<<<<<< HEAD
 def validate_assunto(value):
     if isinstance(value, str) and len(value) > 0:
         return value
@@ -102,3 +103,6 @@ def validate_assunto(value):
     
 assunto = input("Assunto: ")
 print(validate_assunto(assunto))
+=======
+e
+>>>>>>> 785600a0080ac18618819fbcaeffef35ffe808c0
