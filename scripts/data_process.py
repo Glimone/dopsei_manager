@@ -105,20 +105,41 @@ api_data = [
         "lote": "l16",
         "interessado": "ViaOeste",
         "data_entrada": "10/06/2024",
-        "assunto": "INSTALAÇÃO DE SINALIZADORES LUMINOSOS EM VEÍCULOS PRESTADORES DE SERVIÇOS, UTILIZADOS NAS ATIVIDADES DA ARTESP.",
+        "assunto": "INSTALAÇÃO DE SINALIZADORES LUMINOSOS",
     },
 
     {
-        "numero_processo": "567.12345678/2024-36",
+        "numero_processo": "891.12345678/2024-16",
         "lote": "l14",
         "interessado": "Leonardo Hotta",
         "data_entrada": "11/02/2023",
         "assunto": "PROT.SIGA 621104,",
     },
 
+     {
+        "numero_processo": "567.12345678/2024-36",
+        "lote": "l14",
+        "interessado": "Eixo SP",
+        "data_entrada": "11/02/2023",
+        "assunto": "PROT.SIGA 621104,",
+    },
+
+    {
+        "numero_processo": "123.12345678/2024-01",
+        "lote": "lote 13",
+        "interessado": "Rodovias das colinas",
+        "data_entrada": "22/02/2024",
+        "assunto": "PROGRAMAÇÃO DOS SERVIÇOS DE CONSERVAÇÃO DE ROTINA",
+    },
+    {
+        "numero_processo": "123.12345678/2024-01",
+        "lote": "lote 13",
+        "interessado": "Rodovias das colinas",
+        "data_entrada": "22/02/2024",
+        "assunto": "PROGRAMAÇÃO DOS SERVIÇOS DE CONSERVAÇÃO DE ROTINA",
+    },
+
 ]
-
-
 
 
 # numero_processo = validate_numero_processo(input("Número: "))
@@ -134,7 +155,16 @@ api_data = [
 # atribuido = validate_atribuicao(lote)
 # interessado = validate_interessado(input("Interessado: "))
 # assunto = validate_assunto(input("Assunto: "))
-# status = validate_status(atribuido)
+# status = validate_status(f"{atribuido}")
+
+# print(f"\n{numero_processo}")
+# print(lote)
+# print(data)
+# print(atribuido)
+# print(interessado)
+# print(assunto)
+# print(status)
+
 for processo in api_data:
     numero_processo = validate_numero_processo(processo["numero_processo"])
     lote = validate_lote(processo["lote"])
@@ -161,5 +191,5 @@ for processo in api_data:
     } ] )    
     df = pd.concat([new_row, df], ignore_index=True)
 
-
-df.to_excel("SEI.xlsx", index=False)
+print(df)
+# df.to_excel("SEI.xlsx", index=False)
